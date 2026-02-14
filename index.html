@@ -12,7 +12,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             color: #1d1d1f;
         }
 
@@ -21,10 +21,10 @@
             padding: 32px;
             border-radius: 24px;
             width: 100%;
-            max-width: 360px;
+            max-width: 380px;
             text-align: center;
             border: 1px solid #eaeaea;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         .logo-container {
@@ -32,24 +32,67 @@
         }
 
         .logo {
-            width: 60px; /* לוגו קטן ואלגנטי */
+            width: 60px;
             height: auto;
             opacity: 0.9;
         }
 
         h2 {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 600;
             margin: 0 0 8px 0;
             letter-spacing: -0.5px;
         }
 
-        p {
-            font-size: 14px;
+        .subtitle {
+            font-size: 15px;
             color: #86868b;
             margin-bottom: 24px;
             line-height: 1.4;
         }
+
+        /* סגנון כפתור הקישור הישיר */
+        .direct-link-box {
+            background: #f5f5f7;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border: 1px solid #e5e5e7;
+        }
+
+        .btn-primary {
+            display: block;
+            background-color: #0071e3;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0077ed;
+        }
+
+        .divider {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #b6b6b8;
+            font-size: 13px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #eee;
+        }
+
+        .divider:not(:empty)::before { margin-left: .5em; }
+        .divider:not(:empty)::after { margin-right: .5em; }
 
         .input-wrapper {
             margin-bottom: 12px;
@@ -57,24 +100,22 @@
 
         input[type="email"] {
             width: 100%;
-            padding: 14px 18px;
+            padding: 14px;
             border: 1px solid #d2d2d7;
             border-radius: 12px;
             font-size: 15px;
             box-sizing: border-box;
-            background: #f5f5f7;
-            transition: all 0.2s ease;
+            background: #fff;
             outline: none;
             text-align: center;
         }
 
         input[type="email"]:focus {
-            background: #fff;
             border-color: #0071e3;
             box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
         }
 
-        button {
+        .submit-btn {
             width: 100%;
             padding: 14px;
             background-color: #1d1d1f;
@@ -84,16 +125,11 @@
             font-size: 15px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
 
-        button:hover {
+        .submit-btn:hover {
             background-color: #424245;
-            transform: translateY(-1px);
-        }
-
-        button:active {
-            transform: translateY(0);
         }
 
         #success-msg {
@@ -103,7 +139,6 @@
             padding: 15px;
             border-radius: 12px;
             font-size: 14px;
-            font-weight: 500;
             margin-top: 10px;
         }
 
@@ -111,10 +146,8 @@
             font-size: 11px;
             color: #b6b6b8;
             margin-top: 24px;
-            text-transform: lowercase;
         }
 
-        /* אנימציית טעינה פשוטה */
         .loading {
             opacity: 0.6;
             pointer-events: none;
@@ -123,19 +156,27 @@
 </head>
 <body>
 
-<div class="signup-card" id="mainCard">
+<div class="signup-card">
     <div class="logo-container">
         <img src="https://i.ibb.co/YzL4Nvb/image.png" alt="תכלס" class="logo">
     </div>
     
     <h2>תכלס</h2>
-    <p>מהדורת חדשות יומית קצרה וקולעת.</p>
+    <p class="subtitle">מהדורת חדשות יומית קצרה וקולעת.</p>
+
+    <div class="direct-link-box">
+        <strong style="display:block; margin-bottom:8px; font-size:14px;">הצטרפות מהירה:</strong>
+        <a href="https://groups.google.com/a/hamakom.ovh/g/tachles" class="btn-primary">כנסו לקישור הזה</a>
+        <span style="font-size: 12px; color: #6e6e73;">ולחצו על "הצטרפות לקבוצה"</span>
+    </div>
+
+    <div class="divider">או הצטרפות ידנית</div>
 
     <form id="subscribeForm">
         <div class="input-wrapper">
-            <input type="email" name="email" id="emailInput" placeholder="המייל שלך" required>
+            <input type="email" name="email" id="emailInput" placeholder="הזינו מייל לצירוף ע&quot;י נציג" required>
         </div>
-        <button type="submit" id="submitBtn">הצטרפות</button>
+        <button type="submit" id="submitBtn" class="submit-btn">בקשת הצטרפות</button>
     </form>
 
     <div id="success-msg">המייל נרשם, ויצורף לקבוצה בשעות הקרובות.</div>
@@ -152,7 +193,7 @@
     form.addEventListener('submit', e => {
         e.preventDefault();
         
-        btn.innerText = 'מצרף אותך...';
+        btn.innerText = 'שולח בקשה...';
         btn.classList.add('loading');
 
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
@@ -162,7 +203,7 @@
             })
             .catch(error => {
                 alert('אופס, משהו השתבש. נסה שוב!');
-                btn.innerText = 'הצטרפות';
+                btn.innerText = 'בקשת הצטרפות';
                 btn.classList.remove('loading');
             });
     });
