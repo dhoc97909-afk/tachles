@@ -57,7 +57,7 @@
             padding: 16px;
             border-radius: 16px;
             margin-bottom: 24px;
-            border: 1px solid #e5e5e7;
+            border: 2px solid #0071e3;
         }
 
         .btn-primary {
@@ -77,22 +77,23 @@
         }
 
         .divider {
-            margin: 20px 0;
+            margin: 24px 0;
             display: flex;
             align-items: center;
             text-align: center;
-            color: #b6b6b8;
-            font-size: 13px;
+            color: #1d1d1f; /* צבע כהה יותר להדגשה */
+            font-size: 14px; /* גופן מעט גדול יותר */
+            font-weight: 700; /* הדגשה משמעותית */
         }
 
         .divider::before, .divider::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #ddd;
         }
 
-        .divider:not(:empty)::before { margin-left: .5em; }
-        .divider:not(:empty)::after { margin-right: .5em; }
+        .divider:not(:empty)::before { margin-left: .8em; }
+        .divider:not(:empty)::after { margin-right: .8em; }
 
         .input-wrapper {
             margin-bottom: 12px;
@@ -132,6 +133,13 @@
             background-color: #424245;
         }
 
+        .optional-label {
+            display: block;
+            font-size: 12px;
+            color: #86868b;
+            margin-bottom: 8px;
+        }
+
         #success-msg {
             display: none;
             background: #f2faf3;
@@ -165,21 +173,22 @@
     <p class="subtitle">מהדורת חדשות יומית קצרה וקולעת.</p>
 
     <div class="direct-link-box">
-        <strong style="display:block; margin-bottom:8px; font-size:14px;">הצטרפות מהירה:</strong>
+        <strong style="display:block; margin-bottom:8px; font-size:14px;">הצטרפות עצמית (מומלץ):</strong>
         <a href="https://groups.google.com/a/hamakom.ovh/g/tachles" class="btn-primary">הקליקו כאן למעבר לקבוצה</a>
         <span style="font-size: 12px; color: #6e6e73;">ולחצו על "הצטרפות לקבוצה"</span>
     </div>
 
-    <div class="divider">או הצטרפות ידנית</div>
+    <div class="divider">או אם לא הסתדרתם</div>
 
     <form id="subscribeForm">
+        <span class="optional-label">ניתן לבקש מנציג להוסיף אתכם ידנית:</span>
         <div class="input-wrapper">
-            <input type="email" name="email" id="emailInput" placeholder="הזינו מייל לצירוף ע&quot;י נציג" required>
+            <input type="email" name="email" id="emailInput" placeholder="הזינו מייל (אופציונלי)" required>
         </div>
-        <button type="submit" id="submitBtn" class="submit-btn">בקשת הצטרפות</button>
+        <button type="submit" id="submitBtn" class="submit-btn">שליחת בקשה לנציג</button>
     </form>
 
-    <div id="success-msg">המייל נרשם, ויצורף לקבוצה בשעות הקרובות.</div>
+    <div id="success-msg">בקשתכם נשלחה, המייל יצורף לקבוצה על ידי נציג בשעות הקרובות.</div>
     
     <div class="footer-info">tachles@hamakom.ovh</div>
 </div>
@@ -202,9 +211,9 @@
                 msg.style.display = 'block';
             })
             .catch(error => {
-                alert('אופס, משהו השתבש. נסה שוב!');
-                btn.innerText = 'בקשת הצטרפות';
+                btn.innerText = 'אופס, נסו שוב';
                 btn.classList.remove('loading');
+                console.error('Error!', error.message);
             });
     });
 </script>
